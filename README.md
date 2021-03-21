@@ -25,22 +25,22 @@
 
 ## 동작 모델
 로그인 동작 모델입니다.
-![login model](../images/login.png)
+![login model](./images/login.png)
 
 회원가입 동작 모델입니다.
-![sign up model](../images/sign-up.png)
+![sign up model](./images/sign-up.png)
 
 ## 화면구성 및 인터페이스
 
 화면은 로그인화면, 회원가입화면, 메인화면으로 이루어집니다.
 
 ### 로그인화면
-![login](../images/로그인화면.png)
+![login](./images/로그인화면.png)
 
 ### 회원가입화면
-![sign up](../images/회원가입화면.png)
+![sign up](./images/회원가입화면.png)
 
 ### 메인화면
-![main](../images/메인화면.png)
+![main](./images/메인화면.png)
 
 다음장에선 프로젝트를 시작하기 전 간단한 Git 사용법을 다루어보겠습니다.
