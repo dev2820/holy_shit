@@ -12,3 +12,6 @@ main 적용2
 
 good-idea 적용2
 good-idea 적용3
+
+
+test3
