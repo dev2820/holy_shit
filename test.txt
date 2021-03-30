@@ -25,5 +25,9 @@ test5
 no-ff merge
 
 test string for squash
+<<<<<<< HEAD
 test string for squash2
 commit in main
+=======
+test string for squash2
+>>>>>>> good-idea
