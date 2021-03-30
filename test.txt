@@ -21,3 +21,8 @@ test2
 
 
 test5
+
+no-ff merge
+
+test string for squash
+test string for squash2
