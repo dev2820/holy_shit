@@ -17,14 +17,3 @@ test1
 test2
 
 
-
-
-
-test5
-
-no-ff merge
-
-test string for squash
-test string for squash2
-commit in main
-test string for squash2
