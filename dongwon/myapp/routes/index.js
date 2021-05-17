@@ -37,7 +37,7 @@ router.route('/signup').post(function(req,res){
   console.log(name,pass);
 })
 
-router.route('/logout').get(function(req,res){
+router.route('/logout').get(function(req,res){/* home.html 만들고 logout 버튼 달아야함 */
   req.session.destroy(function(){
     req.session;
   })
@@ -45,7 +45,7 @@ router.route('/logout').get(function(req,res){
 })
 
 
-router.post('/make_session',(req, res)=>{
+router.post('/make_session',(req, res)=>{/* session 작동 수정해야함 */
   req.session.user = {
     "name" : "yoo",
     "id" : "won",
