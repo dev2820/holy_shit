@@ -1,0 +1,20 @@
+[
+    {
+        "name":"kimhyunho",
+        "id":"ho",
+        "password":"1234",
+        "score":0
+    },
+    {
+        "name":"yanggijo",
+        "id":"jo",
+        "password":"1234",
+        "score":0
+    },
+    {
+        "name":"yudongwon",
+        "id":"won",
+        "password":"1234",
+        "score":0
+    }
+]

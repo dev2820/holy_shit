@@ -1,6 +1,8 @@
 var express = require('express');
 const path = require('path');
 var router = express.Router();
+const fs = require('fs');
+const session = require('express-session');
 
 router.route('/').get(function(req, res){
   console.log('no 새숀')
@@ -14,7 +16,7 @@ router.route('/login').get(function(req,res){
   if(req.session.user)
     res.redirect('/home');
   else{
-    res.sendFile(path.join(__dirname,'../public','login.html'));
+    res.sendFile(path.join(__dirname,'../public/login','login.html'));
   }
 })
 
@@ -22,7 +24,7 @@ router.route('/signup').get(function(req,res){/*signup 페이지를 호스팅하
   if(req.session.user)/*로그인 된 유저는 signup할 수 없도록 home으로 redirect한다. */
     res.redirect('/home');
   else{/*public내부의 signup.html페이지를 호스팅 */
-    res.sendFile(path.join(__dirname,'../public','signup.html'));
+    res.sendFile(path.join(__dirname,'../public/signup','signup.html'));
   }
 })
 
@@ -46,21 +48,45 @@ router.route('/logout').get(function(req,res){
 })
 
 
-router.post('/login',(req, res)=>{/* session 작동 수정해야함 */
+router.post('/login',(req, res)=>{
   const id = req.body.id || null;
   const pw = req.body.pw || null;
-  // ?? 이유는 모르겠지만 현호가 공갈을 치고 있었다.
-  req.session.user = {
-    "name" : "yoo",
-    "id" : id
-  }
-  res.redirect('/home')
+  fs.readFile(path.join(__dirname,'../data/login.json'), (err, data) =>{
+    if(err)
+        console.log(err)
+    var string = data.toString();
+    const person = JSON.parse(string);
+    let i, f = true;
+
+    for(i=0; person[i] ; i++)
+        if(person[i].id === id && person[i].password === pw){
+          req.session.user = {
+            name:person[i].name,
+            id:id
+          }
+          f = false;
+          break;
+        }
+    if(f)
+        res.send("fail")
+    else {
+      req.session.save((e)=>{
+        res.redirect('/home')
+      }) 
+    }
+  })
 })
 
 router.route('/home').get((req, res) =>{
   res.sendFile(path.join(__dirname,'../public/home','index.html'));
 })
 
-
+router.route('/userInfo').get(function(req, res){
+  if(req.session.user) // session이 있다면 home으로
+    /* # login.json에서 score를 읽어와 score는 해당 유저의 score를, highscore는 모든 유저들 중 최고 점수를 보내도록 수정하세요. */
+      res.json({ name: req.session.user.name, score:0});
+  else // session이 없다면 login 경로로
+      res.send('none');
+})
 
 module.exports = router;
