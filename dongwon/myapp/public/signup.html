@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    signup 페이지</br>
-    기존에 작성했던 signup 페이지 여기 올리고</br>
-    #1) javascript로 유저 비밀번호와 비밀번호 check를 확인해서 일치하면 signup post request를 보내도록 한다</br>
-    #2) post request는 form을 이용한다. userName, userPass 두 개의 값을 post 전송한다.</br>
+    <meta charset="=utf-8">
+    <title>SIGN UP</title>
+    <link rel="stylesheet" type="text/css" href="./signup_style.css"/>
+    <script>
+        function check(){
+            let pwd1=document.getElementById("pwd").value;
+            let pwd2=document.getElementById("pwdcheck").value;
 
-    signup 로직은 구현해놓지 않았고, 추후에 데이터 베이스를 할 때 작성할 예정이므로 일단 post 요청이 오면 post의 값들을 console로 띄우는 작업까지만 해놓았으므로</br>
-    npm start로 local에서 작동시키고 post 요청을 보냈을 때 console창을 보면 request가 성공적으로 보내졌는지 확인할 수 있다.</br>
-    
-    혹시 local에서 npm start로 서버 작동시키는게 기억나지 않는다면 참고</br>
-    1. bash shell을 키고 dongwon/myapp 경로로 들어가서 npm start을 친다. (서버가 작동됨)
-    2. 브라우저를 키고 localhost:3000/signup 에 접속한다. (정상 작동하는지 확인)
+            if(pwd1!=pwd2){
+                alert("비밀번호가 서로 달라!");
+                return false;
+            }
+            else{
+              //  console.log("true");
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        <a href="/login">Go back to login</a>
+    </p>
+    <section>
+        <div class="image">
+            <img src="main.png">
+          </div>
+        <form action="/signup" onsubmit="return check()" method="post" >          
+            <div class="id">
+                <input type="text" name="name" placeholder="Please input your name.">
+            </div>
+            <div class="id">
+                <input type="text" name="id" placeholder="Please input your ID.">
+            </div>
+            <div class="pwd">
+                <input type="password" id="pwd" name="pwd" placeholder="Please input your password.">
+            </div>
+            <div class="pwd">
+                <input type="password" id="pwdcheck" name="pwdcheck" placeholder="Pleas input your password again.">
+            </div>
+            <div>
+                <button id="submit_button">sign-up!</button>
+            </div>
+        </form>
+    </section>
 </body>
 </html>
