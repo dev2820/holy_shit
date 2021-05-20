@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="=utf-8">
+    <title>SIGN UP</title>
+    <link rel="stylesheet" type="text/css" href="./signup_style.css"/>
+    <script>
+        function check(){
+            let pwd1=document.getElementById("pwd").value;
+            let pwd2=document.getElementById("pwdcheck").value;
+
+            if(pwd1!=pwd2){
+                alert("비밀번호가 서로 달라!");
+                return false;
+            }
+            else{
+              //  console.log("true");
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        <a href="/login">Go back to login</a>
+    </p>
+    <section>
+        <div class="image">
+            <img src="main.png">
+        </div>
+        <form action="/signup" onsubmit="return check()" method="post" >          
+            <div class="id">
+                <input type="text" name="name" placeholder="Please input your name.">
+            </div>
+            <div class="id">
+                <input type="text" name="id" placeholder="Please input your ID.">
+            </div>
+            <div class="pwd">
+                <input type="password" id="pwd" name="pwd" placeholder="Please input your password.">
+            </div>
+            <div class="pwd">
+                <input type="password" id="pwdcheck" name="pwdcheck" placeholder="Pleas input your password again.">
+            </div>
+            <div>
+                <button id="submit_button">sign-up!</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

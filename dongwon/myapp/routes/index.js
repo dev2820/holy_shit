@@ -4,9 +4,9 @@ var router = express.Router();
 
 router.route('/').get(function(req, res){
   console.log('no 새숀')
-  if(req.session.user)
+  if(req.session.user) // session이 있다면 home으로
     res.redirect('/home')
-  else
+  else // session이 없다면 login 경로로
     res.redirect('/login')
 })
 
@@ -32,12 +32,13 @@ router.route('/signup').post(function(req,res){
    * 데이터 베이스와 연동할 예정 (mariaDB)
    * 현재는 post로 보내진 name과 pass를 console에 띄우는 기능만 한다.
   */
-  const name = req.body.userName || null;
-  const pass = req.body.userPass || null;
-  console.log(name,pass);
+  const name = req.body.name || null;
+  const id = req.body.id || null;
+  const pass = req.body.pwd || null;
+  console.log(id,name,pass);
 })
 
-router.route('/logout').get(function(req,res){/* home.html 만들고 logout 버튼 달아야함 */
+router.route('/logout').get(function(req,res){
   req.session.destroy(function(){
     req.session;
   })
@@ -45,17 +46,19 @@ router.route('/logout').get(function(req,res){/* home.html 만들고 logout 버�
 })
 
 
-router.post('/make_session',(req, res)=>{/* session 작동 수정해야함 */
+router.post('/login',(req, res)=>{/* session 작동 수정해야함 */
+  const id = req.body.id || null;
+  const pw = req.body.pw || null;
+  // ?? 이유는 모르겠지만 현호가 공갈을 치고 있었다.
   req.session.user = {
     "name" : "yoo",
-    "id" : "won",
-    "pw" : "1234"
+    "id" : id
   }
   res.redirect('/home')
 })
 
 router.route('/home').get((req, res) =>{
-  res.send("home")
+  res.sendFile(path.join(__dirname,'../public/home','index.html'));
 })
 
 
