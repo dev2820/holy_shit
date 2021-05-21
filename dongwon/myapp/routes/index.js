@@ -35,18 +35,10 @@ router.route('/signup').post(function(req,res){
    * 데이터 베이스와 연동할 예정 (mariaDB)
    * 현재는 post로 보내진 name과 pass를 console에 띄우는 기능만 한다.
   */
-<<<<<<< Updated upstream
   const name = req.body.name || null;
   const id = req.body.id || null;
   const pass = req.body.pwd || null;
   console.log(id,name,pass);
-=======
-
-  const name = req.body.userName || null;
-  const pass = req.body.userPass || null;
-  console.log(req.body);
-  console.log(name,pass);
->>>>>>> Stashed changes
 })
 
 router.route('/logout').get(function(req,res){
