@@ -163,7 +163,9 @@ function ajax(url,callback){
 /*html이 완전히 로드되면 실행할 코드 */
 window.onload = function(){
     ajax('/userInfo',(data)=>{
+        console.log(JSON.parse(data).name, JSON.parse(data).score);
         document.getElementById("name").innerText = JSON.parse(data).name;
+        document.getElementById("my-high-score").innerText = JSON.parse(data).score;
         /* # 같은 방식으로 score를 가져와 <span id="high-score">0</span>를 갱신하세요. */
     });
 
@@ -173,6 +175,8 @@ window.onload = function(){
         document.getElementById("highest-name").innerText = JSON.parse(data).name;
         document.getElementById("highest-score").innerText = JSON.parse(data).score;
     });
+
+
     const gameBoard = document.getElementById('game-screen');
     const game = new DongAvoidGame(gameBoard,500,700);
 

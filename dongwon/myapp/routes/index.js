@@ -62,7 +62,9 @@ router.post('/login',(req, res)=>{
         if(person[i].id === id && person[i].password === pw){
           req.session.user = {
             name:person[i].name,
-            id:id
+            id:id,
+            score:person[i].score
+            
           }
           f = false;
           break;
