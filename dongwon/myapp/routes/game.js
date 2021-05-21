@@ -7,7 +7,7 @@ router.post('/setScore',function(req, res){
 })
 
 router.get('/getHighScore',function(req, res){
-    /* # login.json에서 score를 읽어와 최고점수 유저의 이름과 score를 반환한다.*/
+    /* login.json에서 score를 읽어와 최고점수 유저의 이름과 score를 반환한다.*/
     fs.readFile(path.join(__dirname,'../data/login.json'), (err, data)=>{
         if(err)
             console.log(err);
@@ -15,11 +15,15 @@ router.get('/getHighScore',function(req, res){
         var string = data.toString();
         const person = JSON.parse(string);
 
-        for(var highest in person){
-            
-        }
+        champion = person[0];
+        
+        for(var i=1; person[i] ; i++)
+            if(champion.score < person[i].score)
+                champion = person[i];
+        
+        res.json({ name: champion.name, score: champion.score});
     })
-    res.json({ name: "", highscore:0});
+
 })
 
 router.get('/getScore',function(req, res){

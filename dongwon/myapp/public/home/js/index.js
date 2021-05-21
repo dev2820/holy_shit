@@ -47,14 +47,18 @@ class DdongMaker {
         this.dom = ddongMaker;
         gameEl.appendChild(ddongMaker);
         this.ddongList = [];
-        this.dropDdong();
+        setInterval(()=>{
+            this.dropDdong();
+        }, 3000)
         /* # 반복적으로 Ddong을 drop 하는 메소드 추가 
             # 0~500 사이의 랜덤한 위치에 ddong을 일정 주기로 생성해야한다. 
         */
     }
 
     dropDdong(){/* ddong을 생성해 drop 하는 메소드 */
-        this.ddongList.push(new Ddong(this.dom,300));
+        new Ddong(this.dom, Math.random()*500)
+//        this.ddongList.push(new Ddong(this.dom, Math.random()*500));
+        console.log(this.ddongList)
     }
 }
 
@@ -165,6 +169,9 @@ window.onload = function(){
 
     ajax('/game/getHighScore',(data)=>{
         /* # 같은 방식으로 score를 가져와 최고유저의 이름과 score를 갱신하세요.*/
+        console.log(JSON.parse(data).score)
+        document.getElementById("highest-name").innerText = JSON.parse(data).name;
+        document.getElementById("highest-score").innerText = JSON.parse(data).score;
     });
     const gameBoard = document.getElementById('game-screen');
     const game = new DongAvoidGame(gameBoard,500,700);
