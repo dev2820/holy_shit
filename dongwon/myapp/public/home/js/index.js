@@ -176,6 +176,12 @@ window.onload = function(){
         document.getElementById("highest-score").innerText = JSON.parse(data).score;
     });
 
+    ajax('/game/getScore', (data)=>{
+
+        document.getElementById("name").innerText=JSON.parse(data).name;
+        document.getElementById("my-high-score").innerText=JSON.parse(data).score;
+    });
+
 
     const gameBoard = document.getElementById('game-screen');
     const game = new DongAvoidGame(gameBoard,500,700);
