@@ -6,6 +6,8 @@ function absPx(px1,px2) {
 class DongAvoidGame {
     constructor(el,width,height) {
         /* make game board */
+        const starttime=new Date();
+        let score=0;
         const board = document.createElement('div');
         board.id = "game-board";
         board.style.width = width + 'px';
@@ -14,6 +16,26 @@ class DongAvoidGame {
         
         board.addEventListener('dead',(e)=>{
             /* ddong에 맞으면 dead event가 발생한다. */
+            const endtime=new Date();
+            score=endtime-starttime;
+            console.log(score);
+         /*  
+            let submitscore=document.createElement('form');
+            submitscore.action='/setScore';
+            submitscore.method='post';
+            
+            submitscore.submit();
+           */
+          var data=new FormData();
+          data.append('score', score);
+
+          var xhr=new XMLHttpRequest();
+          xhr.open('POST', '/game/setScore', true);
+          
+          xhr.send(data);
+        
+            //console.log(score);
+            //console.log(e);
             this.recordScore();
         });
 
@@ -30,6 +52,7 @@ class DongAvoidGame {
         console.log("restart")
     }
     recordScore() {
+       
         /* # 사망처리 메소드 */
         /* score를 기록을 중지한다.*/
     }
@@ -146,6 +169,7 @@ class Player {
     }
 }
 
+
 function ajax(url,callback){
     var xhr = new XMLHttpRequest();
     xhr.open("GET",encodeURI(url) , true);
@@ -160,13 +184,6 @@ function ajax(url,callback){
 
 /*html이 완전히 로드되면 실행할 코드 */
 window.onload = function(){
-    ajax('/userInfo',(data)=>{
-        console.log(JSON.parse(data).name, JSON.parse(data).score);
-        document.getElementById("name").innerText = JSON.parse(data).name;
-        document.getElementById("my-high-score").innerText = JSON.parse(data).score;
-        /* # 같은 방식으로 score를 가져와 <span id="high-score">0</span>를 갱신하세요. */
-    });
-
     ajax('/game/getHighScore',(data)=>{
         /* 같은 방식으로 score를 가져와 최고유저의 이름과 score를 갱신하세요.*/
         console.log(JSON.parse(data).score)
@@ -174,15 +191,14 @@ window.onload = function(){
         document.getElementById("highest-score").innerText = JSON.parse(data).score;
     });
 
-    ajax('/game/getScore', (data)=>{
-
-        document.getElementById("name").innerText=JSON.parse(data).name;
-        document.getElementById("my-high-score").innerText=JSON.parse(data).score;
+    ajax('/game/getScore',(data)=>{
+        document.getElementById("name").innerText = JSON.parse(data).name;
+        document.getElementById("my-high-score").innerText = JSON.parse(data).score;
     });
-
-
     const gameBoard = document.getElementById('game-screen');
     const game = new DongAvoidGame(gameBoard,500,700);
+   
+
 
     window.addEventListener('keypress',(event)=>{
         if(event.key == 'r') {

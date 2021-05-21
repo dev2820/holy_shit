@@ -46,8 +46,9 @@ router.get('/getHighScore',function(req, res){
 
 router.get('/getScore',function(req, res){
     /* # login.json에서 score를 읽어와 최고점수 유저의 이름과 score를 반환한다.*/ 
-    console.log(req.session.user.score);
+
     res.json({name:req.session.user.name, score:req.session.user.score});
 })
-module.exports = router;
+
+  module.exports = router;
 
