@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 const session = require('express-session')
 
 
@@ -31,14 +32,27 @@ app.use(session({
   }
 }))
 
+app.use(cookieParser('secret code'));
+app.use(session({
+  resave:false,
+  saveUninitialized: false,
+  secret: 'secret code',
+  cookie:{
+    httpOnly:true,
+    secure:false,
+  },
+}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/game', gameRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
