@@ -5,8 +5,8 @@ var router = express.Router();
 var fs = require('fs');
 
 router.post('/setScore',function(req, res){
-    console.log(req.session)
-    console.log(req.body.score)
+  //  console.log(req.session)
+  //  console.log(req.body)
     if(req.session.user)
         fs.readFile(path.join(__dirname,'../data/login.json'), (err, data)=>{
             if(err)
@@ -18,6 +18,7 @@ router.post('/setScore',function(req, res){
             for(var i=0; person[i] ; i++){
                 if(person[i].name == req.session.user.name){
                     person[i].score = req.body.score;
+                    //console.log(person);
                     fs.writeFileSync(path.join(__dirname,'../data/login.json'), JSON.stringify(person), (err)=>{
                         if(err) throw err;
                     })

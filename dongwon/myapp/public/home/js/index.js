@@ -17,26 +17,32 @@ class DongAvoidGame {
         board.addEventListener('dead',(e)=>{
             /* ddong에 맞으면 dead event가 발생한다. */
             const endtime=new Date();
-            score=endtime-starttime;
+            score=endtime.valueOf()-starttime.valueOf();
             console.log(score);
-         /*  
+            
+            let xhr=new XMLHttpRequest();
+            let data={'score' : score};
+            xhr.open('POST', '/game/setScore', true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(data));
+
+            /*  
             let submitscore=document.createElement('form');
             submitscore.action='/setScore';
             submitscore.method='post';
             
             submitscore.submit();
            */
-          var data=new FormData();
-          data.append('score', score);
-
+/*
           var xhr=new XMLHttpRequest();
           xhr.open('POST', '/game/setScore', true);
-
-          xhr.send(data);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          xhr.send(`score=${score}`);
         
             //console.log(score);
             //console.log(e);
             this.recordScore();
+*/
         });
 
         this.player = new Player(board);
