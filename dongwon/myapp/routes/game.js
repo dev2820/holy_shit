@@ -5,23 +5,27 @@ var router = express.Router();
 var fs = require('fs');
 
 router.post('/setScore',function(req, res){
-    fs.readFile(path.join(__dirname,'../data/login.json'), (err, data)=>{
-        if(err)
-            throw err;
+    console.log(req.session)
+    console.log(req.body.score)
+    if(req.session.user)
+        fs.readFile(path.join(__dirname,'../data/login.json'), (err, data)=>{
+            if(err)
+                throw err;
 
-        var string = data.toString();
-        const person = JSON.parse(string);
+            const string = data.toString();
+            const person = JSON.parse(string);
 
-        for(var i=0; person[i] ; i++){
-            if(person[i].name == req.session.user.name){
-                person[i].score = req.body.score;
-                break;
+            for(var i=0; person[i] ; i++){
+                if(person[i].name == req.session.user.name){
+                    person[i].score = req.body.score;
+                    fs.writeFileSync(path.join(__dirname,'../data/login.json'), JSON.stringify(person), (err)=>{
+                        if(err) throw err;
+                    })
+                    break;
+                }
             }
-        }
-        fs.writeFile(path.join(__dirname,'../data/login.json'), JSON.stringify(person), (err)=>{
-            if(err) throw err;
         })
-    })
+    res.send();
 })
 
 router.get('/getHighScore',function(req, res){
@@ -30,7 +34,7 @@ router.get('/getHighScore',function(req, res){
         if(err)
             throw err;
 
-        var string = data.toString();
+        const string = data.toString();
         const person = JSON.parse(string);
 
         champion = person[0];

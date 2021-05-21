@@ -31,7 +31,7 @@ class DongAvoidGame {
 
           var xhr=new XMLHttpRequest();
           xhr.open('POST', '/game/setScore', true);
-          
+
           xhr.send(data);
         
             //console.log(score);
