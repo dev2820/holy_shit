@@ -20,8 +20,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser('1234'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser('1234'));
 app.use(session({
   resave: false,
   saveUninitialized: false,
@@ -31,17 +31,6 @@ app.use(session({
     secure: false,
   }
 }))
-
-app.use(cookieParser('secret code'));
-app.use(session({
-  resave:false,
-  saveUninitialized: false,
-  secret: 'secret code',
-  cookie:{
-    httpOnly:true,
-    secure:false,
-  },
-}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

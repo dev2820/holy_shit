@@ -2,7 +2,6 @@ var express = require('express');
 const path = require('path');
 var router = express.Router();
 const fs = require('fs');
-const session = require('express-session');
 
 router.route('/').get(function(req, res){
   console.log('no 새숀')
