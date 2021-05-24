@@ -102,7 +102,7 @@ class Ddong {
         console.log(ddong.style);
         let top = 0;
         const dropping = setInterval(()=>{
-            top += 5;
+            top += 10;
             ddong.style.top = top + "px";
             if(top > 480) {
                 const dist = absPx(document.getElementById('player').style.left,position); // character와 ddong의 가로 거리 절댓값
