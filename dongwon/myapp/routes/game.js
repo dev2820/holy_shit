@@ -55,5 +55,5 @@ router.get('/getScore',function(req, res){
     res.json({name:req.session.user.name, score:req.session.user.score});
 })
 
-  module.exports = router;
+module.exports = router;
 
